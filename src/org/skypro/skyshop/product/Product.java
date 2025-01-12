@@ -2,27 +2,28 @@ package org.skypro.skyshop.product;
 
 import java.util.Objects;
 
-public class Product {
+public abstract class Product {
     private final String name;
-    private final int price;
+
     //По скольку в данном задании не нужно изменять цену товара - присвоил модификатор final.
 
-    public Product(String name, int price) {
+    public Product(String name) {
         this.name = name;
-        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
+    public abstract boolean isSpecial();
+
+
+    public abstract int getPrice();
+
 
     @Override
     public String toString() {
-        return "Товар: " + name + " " + "Цена " + price;
+        return "Товар: " + name;
     }
 
     @Override
@@ -34,6 +35,6 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price);
+        return Objects.hash(name);
     }
 }

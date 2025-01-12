@@ -1,6 +1,9 @@
 package org.skypro.skyshop.basket;
 
+import org.skypro.skyshop.product.DiscountedProduct.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,13 +17,41 @@ public class ProductBasket {
         size = 0;
     }
 
-    public void addProduct(String productName, int productPrice) {
+    public void addSimpleProduct(String productName, int productPrice) {
         if (size >= productBasket.length) {
             System.out.println("Невозможно добавить продукт, корзина переполнена.");
         }
         for (int i = 0; i < productBasket.length; i++) {
             if (productBasket[i] == null) {
-                productBasket[i] = new Product(productName, productPrice);
+                productBasket[i] = new SimpleProduct(productName, productPrice);
+                size++;
+                break;
+
+            }
+        }
+    }
+
+    public void DiscountedProduct(String productName, int productPrice, int discountValue) {
+        if (size >= productBasket.length) {
+            System.out.println("Невозможно добавить продукт, корзина переполнена.");
+        }
+        for (int i = 0; i < productBasket.length; i++) {
+            if (productBasket[i] == null) {
+                productBasket[i] = new DiscountedProduct(productName, productPrice, discountValue);
+                size++;
+                break;
+
+            }
+        }
+    }
+
+    public void FixPriceProduct(String productName) {
+        if (size >= productBasket.length) {
+            System.out.println("Невозможно добавить продукт, корзина переполнена.");
+        }
+        for (int i = 0; i < productBasket.length; i++) {
+            if (productBasket[i] == null) {
+                productBasket[i] = new FixPriceProduct(productName);
                 size++;
                 break;
 
@@ -45,6 +76,8 @@ public class ProductBasket {
         for (int i = 0; i < size; i++) {
             System.out.println(productBasket[i]);
         }
+        System.out.println("Итого: " + fullPrice());
+        System.out.println("Специальных товаров: " + specialProductCounter());
     }
 
     boolean isEmpty() {
@@ -70,12 +103,23 @@ public class ProductBasket {
         return false;
     }
 
+    private int specialProductCounter() {
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            if (productBasket[i].isSpecial()) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     public void clearBasket() {
         for (int i = 0; i < size; i++) {
             productBasket[i] = null;
         }
         size = 0;
     }
+
 
     @Override
     public boolean equals(Object o) {

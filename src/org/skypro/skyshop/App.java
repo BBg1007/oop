@@ -7,13 +7,13 @@ public class App {
 
         ProductBasket productBasket = new ProductBasket(5);
         //1. Добавление продуктов в корзину:
-        productBasket.addProduct("Колесо", 6000);
-        productBasket.addProduct("Вилка", 6800);
-        productBasket.addProduct("Цепь", 1200);
-        productBasket.addProduct("Звездочка", 2300);
-        productBasket.addProduct("Руль, прямой", 4600);
+        productBasket.addSimpleProduct("Колесо", 6000);
+        productBasket.DiscountedProduct("Вилка", 6800,6);
+        productBasket.FixPriceProduct("Цепь");
+        productBasket.DiscountedProduct("Звездочка", 2300,9);
+        productBasket.addSimpleProduct("Руль, прямой", 4600);
         //2. Добавление продукта в заполненную корзину, в которой нет свободного места:
-        productBasket.addProduct("Рама", 15000);
+        productBasket.addSimpleProduct("Рама", 15000);
         //3. Печать содержимого корзины с несколькими товарами:
         productBasket.printList();
         //4. Получение стоимости корзины с несколькими товарами:
