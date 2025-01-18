@@ -1,8 +1,10 @@
 package org.skypro.skyshop.product;
 
+import org.skypro.skyshop.SearchEngine.Searchable;
+
 import java.util.Objects;
 
-public abstract class Product {
+public abstract class Product implements Searchable {
     private final String name;
 
     //По скольку в данном задании не нужно изменять цену товара - присвоил модификатор final.
@@ -20,6 +22,15 @@ public abstract class Product {
 
     public abstract int getPrice();
 
+    @Override
+    public String searchTerm() {
+        return name;
+    }
+
+    @Override
+    public String getType() {
+        return "PRODUCT";
+    }
 
     @Override
     public String toString() {
