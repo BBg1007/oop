@@ -1,10 +1,5 @@
 package org.skypro.skyshop.basket;
-
-import org.skypro.skyshop.product.DiscountedProduct.DiscountedProduct;
-import org.skypro.skyshop.product.FixPriceProduct.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
-
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,13 +12,13 @@ public class ProductBasket {
         size = 0;
     }
 
-    public void addSimpleProduct(String productName, int productPrice) {
+    public void addProduct(Product product) {
         if (size >= productBasket.length) {
             System.out.println("Невозможно добавить продукт, корзина переполнена.");
         }
         for (int i = 0; i < productBasket.length; i++) {
             if (productBasket[i] == null) {
-                productBasket[i] = new SimpleProduct(productName, productPrice);
+                productBasket[i] = product;
                 size++;
                 break;
 
@@ -31,33 +26,7 @@ public class ProductBasket {
         }
     }
 
-    public void DiscountedProduct(String productName, int productPrice, int discountValue) {
-        if (size >= productBasket.length) {
-            System.out.println("Невозможно добавить продукт, корзина переполнена.");
-        }
-        for (int i = 0; i < productBasket.length; i++) {
-            if (productBasket[i] == null) {
-                productBasket[i] = new DiscountedProduct(productName, productPrice, discountValue);
-                size++;
-                break;
 
-            }
-        }
-    }
-
-    public void FixPriceProduct(String productName) {
-        if (size >= productBasket.length) {
-            System.out.println("Невозможно добавить продукт, корзина переполнена.");
-        }
-        for (int i = 0; i < productBasket.length; i++) {
-            if (productBasket[i] == null) {
-                productBasket[i] = new FixPriceProduct(productName);
-                size++;
-                break;
-
-            }
-        }
-    }
 
     public int fullPrice() {
         int sum = 0;
