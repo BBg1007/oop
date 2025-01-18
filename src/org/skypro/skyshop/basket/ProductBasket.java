@@ -1,7 +1,5 @@
 package org.skypro.skyshop.basket;
-
 import org.skypro.skyshop.product.Product;
-
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -14,19 +12,21 @@ public class ProductBasket {
         size = 0;
     }
 
-    public void addProduct(String productName, int productPrice) {
+    public void addProduct(Product product) {
         if (size >= productBasket.length) {
             System.out.println("Невозможно добавить продукт, корзина переполнена.");
         }
         for (int i = 0; i < productBasket.length; i++) {
             if (productBasket[i] == null) {
-                productBasket[i] = new Product(productName, productPrice);
+                productBasket[i] = product;
                 size++;
                 break;
 
             }
         }
     }
+
+
 
     public int fullPrice() {
         int sum = 0;
@@ -45,6 +45,8 @@ public class ProductBasket {
         for (int i = 0; i < size; i++) {
             System.out.println(productBasket[i]);
         }
+        System.out.println("Итого: " + fullPrice());
+        System.out.println("Специальных товаров: " + specialProductCounter());
     }
 
     boolean isEmpty() {
@@ -70,12 +72,23 @@ public class ProductBasket {
         return false;
     }
 
+    private int specialProductCounter() {
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            if (productBasket[i].isSpecial()) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     public void clearBasket() {
         for (int i = 0; i < size; i++) {
             productBasket[i] = null;
         }
         size = 0;
     }
+
 
     @Override
     public boolean equals(Object o) {

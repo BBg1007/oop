@@ -1,19 +1,26 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.DiscountedProduct.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct.FixPriceProduct;
+import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
 
 public class App {
     public static void main(String[] args) {
 
         ProductBasket productBasket = new ProductBasket(5);
-        //1. Добавление продуктов в корзину:
-        productBasket.addProduct("Колесо", 6000);
-        productBasket.addProduct("Вилка", 6800);
-        productBasket.addProduct("Цепь", 1200);
-        productBasket.addProduct("Звездочка", 2300);
-        productBasket.addProduct("Руль, прямой", 4600);
-        //2. Добавление продукта в заполненную корзину, в которой нет свободного места:
-        productBasket.addProduct("Рама", 15000);
+        Product product = new SimpleProduct("Вилка",6000);
+        Product product1 = new DiscountedProduct("Вилка", 6800,6);
+        Product product2 = new FixPriceProduct("Цепь");
+        Product product3 = new DiscountedProduct("Звездочка", 2300,9);
+        Product product4 = new SimpleProduct("Рама", 15000);
+        productBasket.addProduct(product);
+        productBasket.addProduct(product1);
+        productBasket.addProduct(product2);
+        productBasket.addProduct(product3);
+        productBasket.addProduct(product4);
+
         //3. Печать содержимого корзины с несколькими товарами:
         productBasket.printList();
         //4. Получение стоимости корзины с несколькими товарами:
