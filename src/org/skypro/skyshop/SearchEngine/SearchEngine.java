@@ -24,36 +24,31 @@ public class SearchEngine {
 
     public void add(Searchable searchable) {
 
-        if (isFull()) {
-            System.out.println("Невозможно добавить. Нет места.");
-            return;
-        }
+//        if (isFull()) {
+//            System.out.println("Невозможно добавить. Нет места.");
+//            return;
+//        }
+
 
         for (int i = 0; i < searchables.length; i++) {
 
             if (searchables[i] == null) {
                 searchables[i] = searchable;
+                System.out.println(searchables[i].getName()+" добавлено.");
                 return;
             }
-
         }
+        System.out.println("Невозможно добавить. Нет места.");
 
     }
 
-    private boolean isFull() {
-        for (int i = 0; i < searchables.length; i++) {
-            if (searchables[i] == null) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     public void printSearchResult(Searchable[] searchResult) {
-        for (int i = 0; i < searchResult.length; i++) {
+        for (Searchable searchable : searchResult) {
 
-            if (searchResult[i] != null) {
-                System.out.println(searchResult[i].getStringRepresentation());
+            if (searchable != null) {
+                System.out.println(searchable.getStringRepresentation());
             }
 
         }
