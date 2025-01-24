@@ -23,12 +23,12 @@ public class DiscountedProduct extends Product {
 
     @Override
     public int getPrice() {
-        return basePrice*discountValue/100;
+        return basePrice * discountValue / 100;
     }
 
     @Override
     public String toString() {
-        return getName() +" : "+ getPrice()+ "("+discountValue+"%)";
+        return getName() + " : " + getPrice() + "(" + discountValue + "%)";
     }
 
     @Override
