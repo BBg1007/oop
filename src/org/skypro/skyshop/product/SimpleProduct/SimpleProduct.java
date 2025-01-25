@@ -10,7 +10,17 @@ public class SimpleProduct extends Product {
 
     public SimpleProduct(String name, int price) {
         super(name);
+        try {
+            inputCheck(price);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+            return;
+        }
         this.price = price;
+    }
+
+    private static void inputCheck (int price) {
+        if (price<1) throw new IllegalArgumentException(" Цена должна быть 1 или выше. Введенное значение - "+price+". Продукт не создан.");
     }
 
     @Override
