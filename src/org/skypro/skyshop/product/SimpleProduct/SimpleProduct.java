@@ -19,8 +19,9 @@ public class SimpleProduct extends Product {
         this.price = price;
     }
 
-    private static void inputCheck (int price) {
-        if (price<1) throw new IllegalArgumentException(" Цена должна быть 1 или выше. Введенное значение - "+price+". Продукт не создан.");
+    private static void inputCheck(int price) {
+        if (price < 1)
+            throw new IllegalArgumentException(" Цена должна быть 1 или выше. Введенное значение - " + price + ". Продукт не создан.");
     }
 
     @Override
@@ -35,7 +36,7 @@ public class SimpleProduct extends Product {
 
     @Override
     public String toString() {
-        return getName()+" : "+price;
+        return getName() + " : " + price;
     }
 
     @Override
