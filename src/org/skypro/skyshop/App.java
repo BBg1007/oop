@@ -1,5 +1,6 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.Exeptions.BestResultNotFound;
 import org.skypro.skyshop.SearchEngine.SearchEngine;
 import org.skypro.skyshop.SearchEngine.Searchable;
 import org.skypro.skyshop.article.Article;
@@ -9,7 +10,6 @@ import org.skypro.skyshop.product.FixPriceProduct.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
 
-import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class App {
 
 
         SearchEngine searchEngine = new SearchEngine(10);
-        Article article = new Article("Модели волесипедов для не высоких людей", "Горный велосипед PLANDY год 2024, рама 14, на рост 140-175см или Lorak Glory 100, фиолетовый, 26 дюймов, 17 размер рамы под рост 160-175 см");
+        Article article = new Article("Модели велосипедов для не высоких людей", "Горный велосипед PLANDY год 2024, рама 14, на рост 140-175см или Lorak Glory 100, фиолетовый, 26 дюймов, 17 размер рамы под рост 160-175 см");
         Article article1 = new Article("Виды вилок для велосипеда", "Жесткие и Амортизационные (Пружинные, Воздушные, Воздушно-масляные и Пружинно-масляные");
         Article article2 = new Article("Типы рам велосипедов", "Жёсткий (ригидный), Хардтейл, Двухподвес.");
         searchEngine.add(article2);
@@ -65,6 +65,56 @@ public class App {
         Searchable[] search = searchEngine.search("вело");
         searchEngine.printSearchResult(search);
 
+        //Код для дз темы "Исключения" :
+
+        try {
+            Product product5 = new SimpleProduct("", 5000);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        try {
+            Product product6 = new DiscountedProduct("Горный велосипед", 45000, 125);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        try {
+            Product product7 = new DiscountedProduct("Колесо",0,4);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        try {
+            System.out.println(searchEngine.searchBestMatch("колесо").getStringRepresentation());
+        } catch (BestResultNotFound e) {
+            System.out.println(e);
+        }
+        try {
+            System.out.println(searchEngine.searchBestMatch("вилка").getStringRepresentation());
+        } catch (BestResultNotFound e) {
+            System.out.println(e);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
+
+
 }

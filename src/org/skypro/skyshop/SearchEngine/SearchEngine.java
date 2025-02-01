@@ -1,5 +1,7 @@
 package org.skypro.skyshop.SearchEngine;
 
+import org.skypro.skyshop.Exeptions.BestResultNotFound;
+
 public class SearchEngine {
 
     public Searchable[] searchables;
@@ -23,12 +25,6 @@ public class SearchEngine {
     }
 
     public void add(Searchable searchable) {
-
-//        if (isFull()) {
-//            System.out.println("Невозможно добавить. Нет места.");
-//            return;
-//        }
-
 
         for (int i = 0; i < searchables.length; i++) {
 
@@ -54,6 +50,55 @@ public class SearchEngine {
         }
 
     }
+
+    public Searchable searchBestMatch(String search) throws BestResultNotFound {
+
+        Searchable bestMatch = null;
+        int bestMatchCount = 0;
+
+        for (Searchable searchable : searchables) {
+
+            int index = 0;
+            int count = 0;
+            if (searchable != null) {
+            int indexSubstring = searchable.searchTerm().toLowerCase().indexOf(search.toLowerCase(),index);
+            while (indexSubstring != -1) {
+                count++;
+                index=indexSubstring + search.length();
+                indexSubstring = searchable.searchTerm().toLowerCase().indexOf(search.toLowerCase(),index);
+                if (count>bestMatchCount) {
+                    bestMatchCount = count;
+                    bestMatch = searchable;
+                }
+                }
+            }
+        }
+            if (bestMatch == null) {
+             throw new BestResultNotFound(search);
+            }
+
+        return bestMatch;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
