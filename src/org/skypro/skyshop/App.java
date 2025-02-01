@@ -10,11 +10,14 @@ import org.skypro.skyshop.product.FixPriceProduct.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
 
+import java.util.List;
+
+
 
 public class App {
     public static void main(String[] args) {
 
-        ProductBasket productBasket = new ProductBasket(5);
+        ProductBasket productBasket = new ProductBasket();
         Product product = new SimpleProduct("Вилка", 6000);
         Product product1 = new DiscountedProduct("Вилка", 6800, 6);
         Product product2 = new FixPriceProduct("Цепь");
@@ -27,7 +30,7 @@ public class App {
         productBasket.addProduct(product4);
 
         //3. Печать содержимого корзины с несколькими товарами:
-        productBasket.printList();
+        productBasket.printBasket();
         //4. Получение стоимости корзины с несколькими товарами:
         System.out.println(productBasket.fullPrice());
         //5. Поиск товара, который есть в корзине (в условии возвращает boolean):
@@ -37,7 +40,8 @@ public class App {
         //7. Очистка корзины:
         productBasket.clearBasket();
         //8. Печать содержимого пустой корзины:
-        productBasket.printList();
+        productBasket.printBasket();
+
         //9. Получение стоимости пустой корзины:
         System.out.println(productBasket.fullPrice());
         //10. Поиск товара по имени в пустой корзине:
@@ -45,7 +49,7 @@ public class App {
         System.out.println();
 
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
         Article article = new Article("Модели велосипедов для не высоких людей", "Горный велосипед PLANDY год 2024, рама 14, на рост 140-175см или Lorak Glory 100, фиолетовый, 26 дюймов, 17 размер рамы под рост 160-175 см");
         Article article1 = new Article("Виды вилок для велосипеда", "Жесткие и Амортизационные (Пружинные, Воздушные, Воздушно-масляные и Пружинно-масляные");
         Article article2 = new Article("Типы рам велосипедов", "Жёсткий (ригидный), Хардтейл, Двухподвес.");
@@ -57,12 +61,12 @@ public class App {
         searchEngine.add(product3);
         searchEngine.add(product4);
         searchEngine.add(product);
-        Searchable[] search1 = searchEngine.search("колесо");
+        List<Searchable> search1 = searchEngine.search("колесо");
         searchEngine.printSearchResult(search1);
         System.out.println();
-        Searchable[] search2 = searchEngine.search("вилка");
+        List<Searchable> search2 = searchEngine.search("вилка");
         searchEngine.printSearchResult(search2);
-        Searchable[] search = searchEngine.search("вело");
+        List<Searchable> search = searchEngine.search("вело");
         searchEngine.printSearchResult(search);
 
         //Код для дз темы "Исключения" :
@@ -79,7 +83,7 @@ public class App {
         }
 
         try {
-            Product product7 = new DiscountedProduct("Колесо",0,4);
+            Product product7 = new DiscountedProduct("Колесо", 0, 4);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
@@ -93,28 +97,38 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println(e);
         }
+        //Демонстрация по теме Коллекции:
 
+        productBasket.addProduct(product);
+        productBasket.addProduct(product1);
+        productBasket.addProduct(product2);
+        productBasket.addProduct(product3);
+        productBasket.addProduct(product4);
 
+//1. Удалить существующий продукт из корзины.
+        List<Product> deleted = productBasket.deleteProduct("Вилка");
+//2. Вывести удаленные продукты на экран.
+        System.out.println("Удаленные продукты: " + deleted);
+//3.Вывести содержимое корзины с помощью метода printBasket
+        System.out.println("Содержимое корзины: ");
+        productBasket.printBasket();
+//4.5. Удалить несуществующий продукт. Проверить, что список удаленных продуктов пустой и вывести сообщение “Список пуст”.
+        productBasket.deleteProduct("Вилка");
+//6. Вывести содержимое корзины на экран.
+        productBasket.printBasket();
 
+//Демонстрация изменений класса SimpleProduct:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Product product5 = new SimpleProduct("Велосипед горный", 60000);
+        Product product6 = new DiscountedProduct("Велосипед детский, трехколесный.", 15000, 5);
+        Product product7 = new DiscountedProduct("Велосипед классический", 25000, 10);
+        searchEngine.add(product5);
+        searchEngine.add(product6);
+        searchEngine.add(product7);
+        search = searchEngine.search("вело");
+        searchEngine.printSearchResult(search);
 
 
     }
-
 
 }

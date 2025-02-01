@@ -1,23 +1,27 @@
 package org.skypro.skyshop.SearchEngine;
 
 import org.skypro.skyshop.Exeptions.BestResultNotFound;
+import org.skypro.skyshop.product.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchEngine {
 
-    public Searchable[] searchables;
+    public List<Searchable> searchables;
 
-    public SearchEngine(int size) {
-        this.searchables = new Searchable[size];
+    public SearchEngine() {
+        this.searchables = new ArrayList<Searchable>();
     }
 
-    public Searchable[] search(String textForSearch) {
-        Searchable[] searchResult = new Searchable[5];
+    public List<Searchable> search(String textForSearch) {
+        List<Searchable> searchResult = new ArrayList<>();
 
-        for (int i = 0, count = 0; i < searchables.length && count < 4; i++) {
-            if (searchables[i] != null) {
-                if (searchables[i].searchTerm().toLowerCase().contains(textForSearch)) {
-                    searchResult[count] = searchables[i];
-                    count++;
+        for (int i = 0; i < searchables.size(); i++) {
+            if (searchables.get(i) != null) {
+                if (searchables.get(i).searchTerm().toLowerCase().contains(textForSearch.toLowerCase())) {
+                    searchResult.add(searchables.get(i));
+
                 }
             }
         }
@@ -25,22 +29,11 @@ public class SearchEngine {
     }
 
     public void add(Searchable searchable) {
-
-        for (int i = 0; i < searchables.length; i++) {
-
-            if (searchables[i] == null) {
-                searchables[i] = searchable;
-                System.out.println(searchables[i].getName()+" добавлено.");
-                return;
-            }
-        }
-        System.out.println("Невозможно добавить. Нет места.");
-
+        this.searchables.add(searchable);
     }
 
 
-
-    public void printSearchResult(Searchable[] searchResult) {
+    public void printSearchResult(List<Searchable> searchResult) {
         for (Searchable searchable : searchResult) {
 
             if (searchable != null) {
@@ -61,44 +54,24 @@ public class SearchEngine {
             int index = 0;
             int count = 0;
             if (searchable != null) {
-            int indexSubstring = searchable.searchTerm().toLowerCase().indexOf(search.toLowerCase(),index);
-            while (indexSubstring != -1) {
-                count++;
-                index=indexSubstring + search.length();
-                indexSubstring = searchable.searchTerm().toLowerCase().indexOf(search.toLowerCase(),index);
-                if (count>bestMatchCount) {
-                    bestMatchCount = count;
-                    bestMatch = searchable;
-                }
+                int indexSubstring = searchable.searchTerm().toLowerCase().indexOf(search.toLowerCase(), index);
+                while (indexSubstring != -1) {
+                    count++;
+                    index = indexSubstring + search.length();
+                    indexSubstring = searchable.searchTerm().toLowerCase().indexOf(search.toLowerCase(), index);
+                    if (count > bestMatchCount) {
+                        bestMatchCount = count;
+                        bestMatch = searchable;
+                    }
                 }
             }
         }
-            if (bestMatch == null) {
-             throw new BestResultNotFound(search);
-            }
+        if (bestMatch == null) {
+            throw new BestResultNotFound(search);
+        }
 
         return bestMatch;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

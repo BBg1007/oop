@@ -10,7 +10,8 @@ public abstract class Product implements Searchable {
     //По скольку в данном задании не нужно изменять цену товара - присвоил модификатор final.
 
     public Product(String name) {
-        if (name == null||name.isBlank()) throw new IllegalArgumentException("Не указано название продукта. Продукт не создан.");
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException("Не указано название продукта. Продукт не создан.");
         this.name = name;
     }
 
