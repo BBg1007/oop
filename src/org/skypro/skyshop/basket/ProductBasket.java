@@ -6,15 +6,15 @@ import java.util.*;
 
 
 public class ProductBasket {
-    private Map<String,List<Product>> productBasket;
+    private Map<String, List<Product>> productBasket;
 
 
     public ProductBasket() {
-        this.productBasket = new LinkedHashMap<String,List<Product>>();
+        this.productBasket = new LinkedHashMap<String, List<Product>>();
     }
 
     public void addProduct(Product product) {
-        productBasket.computeIfAbsent(product.getName(),k-> new LinkedList<>()).add(product);
+        productBasket.computeIfAbsent(product.getName(), k -> new LinkedList<>()).add(product);
 
     }
 
@@ -23,8 +23,8 @@ public class ProductBasket {
         int sum = 0;
 
         for (List<Product> products : productBasket.values()) {
-            for (Product product :products){
-                sum+= product.getPrice();
+            for (Product product : products) {
+                sum += product.getPrice();
             }
         }
 
@@ -38,7 +38,7 @@ public class ProductBasket {
             return;
         }
         for (List<Product> products : productBasket.values()) {
-            for (Product product :products){
+            for (Product product : products) {
                 System.out.println(product);
             }
         }
@@ -59,7 +59,7 @@ public class ProductBasket {
         int counter = 0;
 
         for (List<Product> products : productBasket.values()) {
-            for (Product product :products){
+            for (Product product : products) {
                 if (product.isSpecial()) {
                     counter++;
                 }

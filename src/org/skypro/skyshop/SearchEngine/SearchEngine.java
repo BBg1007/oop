@@ -16,13 +16,13 @@ public class SearchEngine {
         this.searchables = new ArrayList<Searchable>();
     }
 
-    public Map<String,Searchable> search(String textForSearch) {
-        Map<String,Searchable> searchResult = new TreeMap<>();
+    public Map<String, Searchable> search(String textForSearch) {
+        Map<String, Searchable> searchResult = new TreeMap<>();
 
         for (int i = 0; i < searchables.size(); i++) {
             if (searchables.get(i) != null) {
                 if (searchables.get(i).searchTerm().toLowerCase().contains(textForSearch.toLowerCase())) {
-                    searchResult.put(searchables.get(i).getName(),searchables.get(i));
+                    searchResult.put(searchables.get(i).getName(), searchables.get(i));
 
                 }
             }
@@ -35,7 +35,7 @@ public class SearchEngine {
     }
 
 
-    public void printSearchResult(Map<String,Searchable> searchResult) {
+    public void printSearchResult(Map<String, Searchable> searchResult) {
         for (Searchable searchable : searchResult.values()) {
 
             if (searchable != null) {

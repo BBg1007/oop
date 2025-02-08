@@ -61,12 +61,12 @@ public class App {
         searchEngine.add(product3);
         searchEngine.add(product4);
         searchEngine.add(product);
-        Map<String,Searchable> search1 = searchEngine.search("колесо");
+        Map<String, Searchable> search1 = searchEngine.search("колесо");
         searchEngine.printSearchResult(search1);
         System.out.println();
-        Map<String,Searchable> search2 = searchEngine.search("вилка");
+        Map<String, Searchable> search2 = searchEngine.search("вилка");
         searchEngine.printSearchResult(search2);
-        Map<String,Searchable> search = searchEngine.search("вело");
+        Map<String, Searchable> search = searchEngine.search("вело");
         searchEngine.printSearchResult(search);
 
         //Код для дз темы "Исключения" :
