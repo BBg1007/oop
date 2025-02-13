@@ -11,7 +11,7 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
 
 import java.util.List;
-
+import java.util.Map;
 
 
 public class App {
@@ -61,12 +61,12 @@ public class App {
         searchEngine.add(product3);
         searchEngine.add(product4);
         searchEngine.add(product);
-        List<Searchable> search1 = searchEngine.search("колесо");
+        Map<String, Searchable> search1 = searchEngine.search("колесо");
         searchEngine.printSearchResult(search1);
         System.out.println();
-        List<Searchable> search2 = searchEngine.search("вилка");
+        Map<String, Searchable> search2 = searchEngine.search("вилка");
         searchEngine.printSearchResult(search2);
-        List<Searchable> search = searchEngine.search("вело");
+        Map<String, Searchable> search = searchEngine.search("вело");
         searchEngine.printSearchResult(search);
 
         //Код для дз темы "Исключения" :
