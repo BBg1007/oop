@@ -12,6 +12,7 @@ import org.skypro.skyshop.product.SimpleProduct.SimpleProduct;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class App {
@@ -61,12 +62,12 @@ public class App {
         searchEngine.add(product3);
         searchEngine.add(product4);
         searchEngine.add(product);
-        Map<String, Searchable> search1 = searchEngine.search("колесо");
+        Set<Searchable> search1 = searchEngine.search("колесо");
         searchEngine.printSearchResult(search1);
         System.out.println();
-        Map<String, Searchable> search2 = searchEngine.search("вилка");
+        Set<Searchable> search2 = searchEngine.search("вилка");
         searchEngine.printSearchResult(search2);
-        Map<String, Searchable> search = searchEngine.search("вело");
+        Set<Searchable> search = searchEngine.search("вело");
         searchEngine.printSearchResult(search);
 
         //Код для дз темы "Исключения" :
@@ -109,7 +110,7 @@ public class App {
         List<Product> deleted = productBasket.deleteProduct("Вилка");
 //2. Вывести удаленные продукты на экран.
         System.out.println("Удаленные продукты: " + deleted);
-//3.Вывести содержимое корзины с помощью метода printBasket
+//3. Вывести содержимое корзины с помощью метода printBasket
         System.out.println("Содержимое корзины: ");
         productBasket.printBasket();
 //4.5. Удалить несуществующий продукт. Проверить, что список удаленных продуктов пустой и вывести сообщение “Список пуст”.
@@ -126,6 +127,20 @@ public class App {
         searchEngine.add(product6);
         searchEngine.add(product7);
         search = searchEngine.search("вело");
+        searchEngine.printSearchResult(search);
+//Тест работы компаратора:
+
+        Article article3 = new Article("Статья с цифрой 1", "Тестовая");
+        Article article4 = new Article("Статья с цифрой 2", "Тестовая");
+        Article article5 = new Article("Статья с буквой а", "Тестовая");
+        Article article6 = new Article("Статья с буквой А", "Тестовая");
+        Article article7 = new Article("Статья с буквой б", "Тестовая");
+        searchEngine.add(article3);
+        searchEngine.add(article5);
+        searchEngine.add(article4);
+        searchEngine.add(article6);
+        searchEngine.add(article7);
+        search = searchEngine.search("Тест");
         searchEngine.printSearchResult(search);
 
 

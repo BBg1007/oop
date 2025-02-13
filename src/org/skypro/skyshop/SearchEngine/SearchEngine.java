@@ -1,32 +1,28 @@
 package org.skypro.skyshop.SearchEngine;
 
 import org.skypro.skyshop.Exeptions.BestResultNotFound;
-import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
 
-    public List<Searchable> searchables;
+    public Set<Searchable> searchables;
 
     public SearchEngine() {
-        this.searchables = new ArrayList<Searchable>();
+        this.searchables = new HashSet<>();
     }
 
-    public Map<String, Searchable> search(String textForSearch) {
-        Map<String, Searchable> searchResult = new TreeMap<>();
+    public Set<Searchable> search(String textForSearch) {
+        Set<Searchable> searchResult = new TreeSet<>(new SearchableByLengthComparator());
 
-        for (int i = 0; i < searchables.size(); i++) {
-            if (searchables.get(i) != null) {
-                if (searchables.get(i).searchTerm().toLowerCase().contains(textForSearch.toLowerCase())) {
-                    searchResult.put(searchables.get(i).getName(), searchables.get(i));
-
+        for (Searchable searchable : searchables) {
+            if (searchable.getName() != null) {
+                if (searchable.searchTerm().toLowerCase().contains(textForSearch.toLowerCase())) {
+                    searchResult.add(searchable);
                 }
             }
         }
+
         return searchResult;
     }
 
@@ -35,8 +31,8 @@ public class SearchEngine {
     }
 
 
-    public void printSearchResult(Map<String, Searchable> searchResult) {
-        for (Searchable searchable : searchResult.values()) {
+    public void printSearchResult(Set<Searchable> searchResult) {
+        for (Searchable searchable : searchResult) {
 
             if (searchable != null) {
                 System.out.println(searchable.getStringRepresentation());
